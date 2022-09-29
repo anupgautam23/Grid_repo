@@ -1,0 +1,218 @@
+
+  ** Suspending thread timely:-
+  ===============================
+
+
+ThreadA.java:-
+----------------
+
+
+package Day9_MultiThreading;
+
+public class ThreadA implements Runnable{
+
+	@Override
+	public void run() {
+		for(int i=0;i<10;i++)
+		{
+			System.out.println(Thread.currentThread().getName()+"  is running "+i);
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}
+
+
+
+Demo.java:-
+------------
+
+
+package Day9_MultiThreading;
+
+public class Demo {
+
+	public static void main(String[] args) throws InterruptedException {
+					
+			ThreadA  tA =  new ThreadA();
+			Thread t1 = new Thread(tA);
+			t1.setName("raj");
+			t1.start();
+			
+			for(int i=0;i<20;i++)
+			{
+			 System.out.println(Thread.currentThread().getName()+" is running "+i);
+			 Thread.sleep(1000);
+			}
+			
+				}
+
+
+}
+
+----------------------------------------------------------------------------------------
+
+Suspending by Join:-
+--------------------
+
+Main.java:-
+-------------
+
+
+package Day9_MultiThreading;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+					
+			A  a1 =  new A();
+			Thread t1 = new Thread(a1);
+			
+			t1.start();
+			
+			
+			t1.join(); // main thread is waiting till A thread completed
+			
+			int result = a1.sum;
+			
+			
+			for(int i=0;i<20;i++)
+			{
+			 System.out.println(Thread.currentThread().getName()+" is running "+i);
+			System.out.println(result);
+			}
+			
+				}
+
+
+}
+
+
+
+A.java:-
+---------
+
+package Day9_MultiThreading;
+
+public class A implements Runnable{
+
+	int sum = 0 ; 
+	
+	@Override
+	public void run() {
+		for(int i=0;i<10;i++)
+		{
+			sum+=i;
+		}	
+		System.out.println("sum is "+sum);
+	}
+
+}
+
+
+
+Synchronized:-
+===============
+
+
+ThreadA.java:-
+--------------
+
+package Day9_MultiThreading;
+
+public class ThreadA extends Thread{
+
+	Common c;
+	String name;
+	public ThreadA(Common c, String name) {
+		super();
+		this.c = c;
+		this.name = name;
+	}
+	
+	@Override
+	public void run() {
+		
+		c.fun1(name);
+	}
+}
+
+
+ThreadB.java:-
+--------------
+
+package Day9_MultiThreading;
+
+public class ThreadB extends Thread{
+	
+	Common c;
+	String name;
+	public ThreadB(Common c, String name) {
+		super();
+		this.c = c;
+		this.name = name;
+	}
+	
+	@Override
+	public void run() {
+		
+		c.fun1(name);
+	}
+
+}
+
+
+Common.java:-
+--------------
+
+package Day9_MultiThreading;
+
+public class Common {
+
+	public synchronized void fun1(String name) {
+		System.out.println("welcome");
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(name);
+	}
+
+}
+
+
+Main.java:-
+-------------
+
+package Day9_MultiThreading;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+					
+		Common c = new Common();
+		ThreadA t1 = new ThreadA(c,"Ram");
+		ThreadB t2 =  new ThreadB(c, "shyam");
+		t1.start();
+		t2.start();
+		
+		
+			System.out.println("end of main");
+				}
+
+
+}
+
+
+

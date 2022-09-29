@@ -1,0 +1,340 @@
+
+lambda exp:- 
+it is an expression using we can provide the impl of FI.
+Only used with functional interface(having only one method).
+
+LE comprises 3 things:
+ 1.parameter(data type is optional):
+ 2.Lambda operator:  -> 
+ 3.Method Body:  if we write only one  statement iside the impl body 
+                then curly braces is optional.
+  Note: LE does not consider the mthod name of FI
+  
+  Example: - 
+  
+  Intr.java:
+  ----------
+  
+  package Day6_LambdaFun;
+
+public interface Intr  {
+
+	void sayHello(String name,int age);
+}
+  
+  
+  IntrImpl.java:
+  --------------
+  
+  package Day6_LambdaFun;
+
+public class IntrImpl implements Intr{
+
+	@Override
+	public void sayHello(String name,int age) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+  
+  
+Simplest form 
+
+
+Demo.java:-
+------------
+
+package Day6_LambdaFun;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Intr intr = (x,y) -> System.out.println("welcome "+x+" your age is "+y);
+		
+		
+		intr.sayHello("anup",25);
+	}
+
+}
+
+
+longest  form :-
+
+demo.java:-
+-----------
+
+package Day6_LambdaFun;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Intr intr = (String x,int y) -> {
+		System.out.println("welcome "+x+" your age is "+y);
+		}
+		
+		intr.sayHello("anup",25);
+	}
+
+}
+ 
+ 
+ ----------------------------------------------------------------------
+ 
+ lambda Expression  with return type :-
+ --------------------------------------
+ if inside the method body only 1 ststement is there then {}
+ is optional, and return type is not needed .
+ 
+ 
+ Consumer : -
+ ===================================
+ demo.java:-
+ ------------
+ 
+ package Day6_LambdaFun;
+
+import java.util.function.Consumer;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Consumer<Student> consumer = new MyConsumer();
+		
+		consumer.accept(new Student(10,"s1","s1@gmail.com",100));
+		
+		Consumer<Student> consumer2 = s ->{
+			System.out.println("roll is "+s.getRoll());
+			System.out.println("name is "+s.getName());
+			System.out.println("email is "+s.getEmail());
+		};
+		consumer2.accept(new Student(11,"s2","s2@gmail.com",200));
+	}
+
+}
+ 
+ 
+ 
+ myconsumer.java:-
+ -----------------
+ 
+ package Day6_LambdaFun;
+
+import java.util.function.Consumer;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class MyConsumer implements Consumer<Student> {
+
+	@Override
+	public void accept(Student t) {
+		// TODO Auto-generated method stub
+		System.out.println("inside accept");
+	}
+
+}
+ 
+ 
+ forEach method:- 
+ ----------------
+ 
+ public void forEach(Consumer action): // action for each element.  
+ 
+ -- this is default methoda belongs to iterable interface.
+ -- every collection is iterable.
+ -- this forEach method refer collection hirarchy diagram
+ -- so we can call this method on any collection object.
+  
+ demo.java:-
+ -----------
+ 
+ package Day6_LambdaFun;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		List<String> nameList = Arrays.asList("ram","dinesh","shyam");
+		
+		/* to cccess the ele from list */
+		// Normmal forLopp
+		//inhanced forloop
+		// iterable
+		//listiterable
+		
+		nameList.forEach(n->System.out.println(n.toUpperCase()));
+	}
+
+}
+ 
+ 
+ ex:- 
+ 
+ Demo.java:-
+ 
+ package Day6_LambdaFun;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		List<Student> stdList = new ArrayList<>();
+		stdList.add(new Student(10,"s1","s1@gamail.com",400));
+		stdList.add(new Student(11,"s2","s1@gamail.com",500));
+		stdList.add(new Student(12,"s3","s1@gamail.com",200));
+
+		stdList.forEach(s-> {
+			System.out.println(s);
+			
+			// write that object to the file (serialize file)
+			
+			
+			
+		});
+	}
+
+}
+ 
+ 
+ Supplier:-  java.util.function.supplier<T> :-
+ -----------------------------------------------
+ 
+ public T get();
+ 
+ mysupplier.java:
+ ---------------
+ 
+ package Day6_LambdaFun;
+
+import java.util.function.Supplier;
+
+public class Mysupplier implements Supplier<String>{
+
+	@Override
+	public String get() {
+		// TODO Auto-generated method stub
+		return "this message from the exernal class";
+	}
+
+}
+ 
+ 
+ demo.java:-
+ -----------
+ package Day6_LambdaFun;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Supplier<String> s1 = new Mysupplier();
+		String str =	s1.get();
+		System.out.println(str);
+		
+		// using LE
+		
+		Supplier<String> s2 = ()-> "this message form the LE";
+		
+		String str2 = s2.get();
+		System.out.println(str2);
+		
+		Supplier<Student> s3 = () -> new Student(10,"ram","@gam",100);
+			 
+		System.out.println(s3.get());
+		
+		
+	}
+
+}
+ 
+ Function: -  java.util.function.Function<T,R>
+  
+ public R apply(T t);
+ 
+ 
+ ex:- 
+ 
+ myFunction.java:-
+ ---------------------
+ 
+ package Day6_LambdaFun;
+
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class MyFunction implements Function<Student, String>{
+
+	@Override
+	public String apply(Student s) {
+		if(s.getMarks()>300)
+			return "pass";
+		else {
+			return "fail";
+			
+			
+					
+		}
+	}
+
+	
+}
+ 
+ 
+ Demo.java:-
+ ------------
+ 
+ package Day6_LambdaFun;
+
+import java.util.function.Function;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Function<Student, String> f1= new MyFunction();
+		System.out.println(f1.apply(new Student(10,"ram","@",200)));
+		
+		Function<Student, String> f2 = s ->s.getMarks()>300 ? "pass" : "fail";
+		
+		 System.out.println(f2.apply(new Student(10,"ram","@",400)));
+
+		 	
+	
+	}
+
+}
+ 
+ 
+ 
+ 
+ 
+  
+                 

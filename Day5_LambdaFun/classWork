@@ -1,0 +1,108 @@
+
+Nested Try- Catch block: 
+------------------------
+
+ Demo.java:
+ 
+ package Day5_LambdaFun;
+
+import Day1_HashMap.We.A;
+import Day2_HashMap.Que2.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		System.out.println("start of mainn");
+		try {
+			System.out.println("inside try 1");
+			
+			System.out.println(100/10);
+			
+			try {
+				
+			System.out.println("inside try2 ");
+			Student student = new Student();
+			student.setMarks(0);
+		
+			System.out.println("end of try2");	
+			} catch (NullPointerException npe) {
+				System.out.println("inisde catch of try 2");
+			}
+			
+			
+			System.out.println("end of try 1");
+		} catch (Exception e) {
+			System.out.println("catch of try 1");
+		}
+		System.out.println("end of main");
+	}
+}
+ 
+ 
+ output:
+ 
+ start of main
+inside try 1
+10
+inside try2 
+end of try2
+end of try 1
+end of main
+
+
+
+
+Throws in constructor:-
+-- since constructor is also a block of code and there might be a
+   chance of logical error.
+   
+   
+ Demo.java:-
+ 
+ package Day5_LambdaFun;
+
+import Day4_Checked_Exception.Que5.InvalidCountryException;
+
+public class Demo {
+	public Demo(int  age, int salary) throws InvalidCountryException {
+		System.out.println("inside constructor of demo");
+	}
+
+	public static void main(String[] args) {
+		
+		System.out.println("start of mainn");
+		try {
+			Demo d1 = new Demo(0, 0);
+		} catch (InvalidCountryException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("end of main");
+	}
+}
+ 
+ 
+ output:-
+ 
+ start of main
+ inside constructor of demo
+ end of main
+ 
+ 
+ Note:- if any constructor throws a checked exception then we need 
+  to create object of  that class inside try and catch or throws checked
+  Exception.
+  
+  
+  
+  
+Throws with inheritance: - if a parent class constructor throws any checked exception
+---------------------------------------------------------
+| ***** very very important for interview point of view.|
+---------------------------------------------------------
+
+ 
+
+ 
+  
+   

@@ -1,0 +1,13 @@
+Q1/ What is the difference between a synchronized method and a synchronized block?
+
+Ans:-
+
+ 1. A synchronized method provide the lock corresponding to object level or class level. whereas,,
+    synchronized block provides a lock on any object depending upon the parameter.
+    
+ 2. A synchronized method imposes lock on entire functionality of the respective method, while the synchronized block
+    is used to lock a lesser number of consecutive statements.
+    
+ 3. Since, the synchronized method provides a lock on current instance otherwise class level , therefore, nullPointerException
+    can't be expected. on the other hand , if the parameter evaluated as null , then there would be likely a nullPointerException occur.
+   

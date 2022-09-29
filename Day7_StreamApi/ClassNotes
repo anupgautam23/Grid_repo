@@ -1,0 +1,462 @@
+
+Java stream api:- 
+
+--this api belongs to "java.til.stream" package. 
+-- belongs from IO stream, this IO-Stream api belongs to java.io
+package here we represent flow of data between peripherals(input & output)
+in the form of bytes and characters.
+-- this java.util.stream package contains some library classes and interfacses by 
+   using which can perform functional style of programming on a group of object(collection
+   of data) in the form of object.
+   --This java.io stream represents flow of data in bytes or characters
+   -- this java.util stream represents flow of data in the form of object
+   
+   ** this api has one main interface:
+    -- java.util.stream.Stream(I)
+    
+ Note: object of this Stream interface represents flow / sequence of objects from a source like coollection oject.
+  
+  Features of stream:-
+  ====================
+  
+  1. stream does not store the elements, it only represents ele.  in a sequence.
+  ex:- wire does not hold the electricity
+  2.it represents only flow of objects not the premitives.
+  3. operations(filtering,mapping,sorting,etc) performed on the stream object  does not modify
+     source object.
+   ex:- filtering a stream obtained from a source(collection) produces a new 
+        stream with the filtered elements rather than rremoving ele. from main source.
+  4. with the help of S object we can  perform various op on the colection 
+   data in function style like filtering solme ele, printing some  ele, transfroming some ele.. etc..
+   
+ --collection  interface provide 2 method to get a stream object
+ 
+   1. Stream<T>stream();  
+   2. Stream<T>parrellalStream();//this stream object is used on multithreaded application.
+   
+   
+   
+   Methods of the Stream(I) interface:
+   ------------------------------------
+   
+   2 types of method:-
+   
+  1. intermediate method
+  2. terminal methods
+  
+  
+   1. intermediate method:--- returns new stream object instead of final output.
+                            -- never gives the final output
+     -- some of the commnly used intermediatemethod are:
+             - map(),filter() method
+   2. Terminal method:- -- stream object retruns the final output onlywhen terminal method 
+   is called 
+       -- generally it givs teh final output
+     -- these method consumes teh stream object,and after that we can not re-use that stream obj again.
+     
+ Note: ifwe try touse a consumed stream obj onceagain then we will get an exception.
+ 
+ 
+ 
+ some of the commonly used terminl methods are:
+ 
+ --forEach(Consumer action) : -  // similar to the iterable interface foreach method                                       
+ -- collect()
+ -- min(), max()
+ --count() etc
+ 
+ Example:-
+ 
+ Demo.jav:-
+ ----------
+ 
+ package Day7_StreamApi;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<String> list = Arrays.asList("a","b","c");
+		Stream<String> str1 =   list.stream();
+		str1.forEach(s->System.out.println(s));
+		
+		//str1.forEach(s->System.out.println(s)); // exception
+	}
+
+}
+ 
+ 
+ Filter() methods:-
+ ========================
+ 
+ -- intermedite method
+ -- takes a predicate object as an argument , and filter the stream based the predicate conditon ,and returns the
+     filtered ele in another stream object.
+   
+   
+   ex:-
+   
+   Demo.java:-
+   -----------
+   
+   package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+		
+		// from the abovelist we get anotehr listof the std whose
+		// marks is greater then 200
+		
+		 Stream<Student> str1=  std1.stream();
+		 Stream<Student> str2 =  str1.filter(s-> s.getMarks()>200);
+		
+//		  str1.forEach(s-> System.out.println(s));
+		  str2.forEach(s-> System.out.println(s));
+		  
+		  std1.stream()
+		      .filter(s->s.getMarks()>200)
+		      .forEach(s->System.out.println(s));
+		 
+		 
+		 
+	}
+
+}
+   
+   
+Creating anotehr list based on fitered ele. instead of printing 
+
+
+ex:- demo.java:-
+
+package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+		
+		// from the abovelist we get anotehr listof the std whose
+		// marks is greater then 200
+		
+		
+		  
+		 List<Student> filteredstudentList=   std1.stream()
+											      .filter(s->s.getMarks()>200)
+											      .collect(Collectors.toList());
+		 System.out.println(std1);
+		 System.out.println(filteredstudentList);
+		 
+		 
+	}
+
+}
+
+
+Map() method:- 
+ -- intermediate method
+ -- thi method used to transfrom the object
+ -- this method takes java.uti.function.Function(I) object as an argument and map/transfrom
+    the ele to a new ele. and retrn the mapped ele in another stream.
+    
+   
+   
+   exaple:-
+   
+   Demo.java:-
+   -----------
+   
+   package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+		
+		Stream<Student> str1=  std1.stream();
+		Stream<Student> str2= str1.map(s-> {
+			Student s2 =new Student(s.getRoll(),s.getName(),s.getEmail(),s.getMarks()+50);
+			return s2; 
+		});
+		
+		List<Student> modifiedstdList=  str2.collect(Collectors.toList());
+		 
+		
+		
+		 List<Student>modifiedList= std1.stream()
+		    .map(s-> {
+			Student s2 =new Student(s.getRoll(),s.getName(),s.getEmail(),s.getMarks()+50);
+			return s2; 
+		})
+		    .collect(Collectors.toList());
+		System.out.println(std1);
+		System.out.println(modifiedList);
+		 
+	}
+
+
+demo.java:--   filter then map
+------------------------------
+
+package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+		List<Student> modifiedList = std1.stream()
+				.filter(s->s.getMarks()>200)
+				.map(s-> {
+					Student s2 =new Student(s.getRoll(),s.getName(),s.getEmail(),s.getMarks()+50);
+					return s2; 
+				})
+				    .collect(Collectors.toList());
+		
+		System.out.println(modifiedList);
+		
+		
+		 
+	}
+
+}
+
+
+}
+ min and max() methods:-
+ ---------------------
+ 
+ -- these are terminal methods which will takes a comparator by using which we can decide max and min the list
+ -- return min and max in form of "java.util.Optional" class object.
+ -- This Optional class introduced  in java1.8 and it is basically
+  used to avoid null pointer exception 
+ -- to get the ele from this Optionla class. we need to call get() method
+ 
+ 
+ ex:-
+ 
+ Demo.java:-
+ ------------
+ 
+ package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+//		Stream<Student> str1 = std1.stream();
+//		Optional<Student> optional=  str1.max((s1,s2)-> s1.getMarks()>s2.getMarks() ? +1:-1);
+//				
+//		Student student=  optional.get();
+//		System.out.println(student);
+		
+		Student student1 =  std1.stream()
+							    .min((s1,s2)-> s1.getMarks()-s2.getMarks())
+							    .get();
+		
+		System.out.println(student1);
+		 
+	}
+
+}
+ 
+ 
+ countmethod
+ 
+ exmple:--
+ 
+ package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+			long result
+			=std1.stream()
+				        .filter(s->s.getMarks()>200).count();
+		
+		System.out.println(result);
+		
+	}
+
+}
+ 
+ Allmatch() anyMatch(),nonMathc():-
+ --------------------------------
+ 
+ takes predicate obj and return boolena value
+ 
+ ex:-
+ demo.jav:-
+ -------------
+ package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+			boolean result =std1.stream()
+				            .anyMatch(s->s.getMarks()>400);
+		
+		System.out.println(result);
+		
+	}
+
+}
+ 
+ 
+ allMath();
+ ---------
+ 
+ Demo.java:-
+ -----------
+ 
+ package Day7_StreamApi;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import Day6_LambdaFun.Que3.Student;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		List<Student> std1 = new ArrayList<>();
+		std1.add(new Student(10,"ram","@",200));
+		std1.add(new Student(11,"rim","@",250));
+		std1.add(new Student(12,"rm","@",230));
+		std1.add(new Student(13,"am","@",100));
+		std1.add(new Student(14,"n","@",160));
+	
+			boolean result =std1.stream()
+				            .allMatch(s->s.getMarks()>30);
+		
+		System.out.println(result);
+		
+	}
+
+}
+        
+   
+          
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      

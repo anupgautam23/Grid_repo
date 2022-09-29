@@ -1,0 +1,17 @@
+Q3/- What is the Serialization and deseiralization in Java
+Ams:-
+------
+** Serialization:-
+-----------------
+	-We use Java to create objects. These objects are stored in memory and removed by the 
+	 garbage collector once they’re no longer being used. If we want to transfer an object and, 
+	 for instance, store it on a disk or send it over a network, we need to transform it into a 
+	 byte stream. To do this, the class of that object needs to implement the Serializable interface.
+ 
+ ** Deserialization:-
+ --------------------
+ 
+	  -Deserialization is precisely the opposite of serialization. With deserialization, you start with 
+	   a byte stream and re-create the object you previously serialized in its original state. However, 
+	   you must have the definition of the object to successfully re-create it.
+ 

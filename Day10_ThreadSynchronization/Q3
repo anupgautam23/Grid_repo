@@ -1,0 +1,20 @@
+Q4/- What is a Race condition, How will you solve the Race condition,explain with an
+Example.
+
+Ans:-
+------
+
+	A condition in which the critical section (a part of the program where shared memory is accessed) 
+	is concurrently executed by two or more threads. It leads to incorrect behavior of a program.
+	It is also defined as the, a condition in which two or more thread are compete to get a certain shared resources.
+	
+	Example:-
+	----------
+	
+	--> if at a time one thread is reading a data from linked list and another thread is deleting the data at same time, and these
+	 may leads to race condition and we can get a runtime error. to avoid race condition and we use synchronised keyword.
+	 after using synchronized method the classlevel lock and object level lock is needed which after executing the first thread
+	 lock the entire method and restrict to  enter another thread which leeads to avoidrace condition.
+	    
+	    
+	

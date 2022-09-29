@@ -1,0 +1,110 @@
+Q1) What do you mean by Multithreading? Why is it important?
+
+-->
+Multithreading:-
+----------------
+
+-- Multithreading is the ability of a program or an operating system to enable
+   more than one user at a time without requiring multiple copies of the program 
+   running on the computer. Multithreading can also handle multiple requests from 
+   the same user.
+   Multithreadingis important because:---
+     1. It doesn't block the user because threads are independent and you can perform multiple operations at the
+		same time.
+	 2. You can perform many operations together, so it saves time.
+	 3. Threads are independent, so it doesn't affect other threads if an exception occurs in a single thread.
+   
+
+Q2) What are the benefits of using Multithreading?
+
+-- Advantages of Multithreading: 
+   --Multithreading saves time as you can perform multiple operations together.
+   --The threads are independent, so it does not block the user to perform multiple 
+     operations at the same time and also, if an exception occurs in a single thread, 
+     it does not affect other threads.
+   
+   
+Q3) Differentiate between process and thread.
+
+-- Process: Processes are basically the programs that are dispatched from the 
+  --------- ready state and are scheduled in the CPU for execution. PCB(Process 
+            Control Block) holds the concept of process. A process can create other 
+            processes which are known as Child Processes. The process takes more 
+            time to terminate and it is isolated means it does not share the memory 
+            with any other process.
+            The process can have the following states new, ready, running, waiting, terminated, and suspended. 
+--Thread: Thread is the segment of a process which means a process can have multiple 
+  ------- threads and these multiple threads are contained within a process. A thread 
+          has three states: Running, Ready, and Blocked. 
+
+		  The thread takes less time to terminate as compared to the process but unlike 
+		  the process, threads do not isolate.            
+
+		  		  
+		  
+Q4) What are the different states of a thread, or what is thread lifecycle?
+
+--  A thread only lie in one of the following  states:
+    -- New:- Thread state for a thread that has not yet started
+	-- Runnable:-  Thread state for a runnable thread. A thread in the runnable state is 
+	         	   executing in the Java virtual machine but it may be waiting for other resources 
+	         	   from the operating system such as a processor. 
+	-- Blocked:- Thread state for a thread blocked waiting for a monitor lock. A thread in the blocked 
+				 state is waiting for a monitor lock to enter a synchronized block/method or reenter a 
+				 synchronized block/method after calling Object.wait()
+	-- Waiting:- Thread state for a waiting thread. A thread is in the waiting state due to calling one of 
+				 the following methods:
+	-- Timed Waiting:- Thread state for a waiting thread with a specified waiting time. A thread is in the 
+					   timed waiting state due to calling one of the following methods with a specified 
+					   positive waiting time:
+					    --Thread.sleep
+					    --Object.wait with timeout
+					    --Thread.join with timeout
+						--LockSupport.parkNanos
+						--LockSupport.parkUntil
+	-- Terminated:- Thread state for a terminated thread. The thread has completed execution. 
+  
+Life Cycle of a thread:-
+=========================
+New Thread: When a new thread is created, it is in the new state. The thread has 
+			not yet started to run when the thread is in this state. When a thread 
+			lies in the new state, its code is yet to be run and hasn’t started to execute.
+Runnable State: A thread that is ready to run is moved to a runnable state. 
+			In this state, a thread might actually be running or it might be ready to run at 
+			any instant of time. It is the responsibility of the thread scheduler to give the 
+			thread, time to run.A multi-threaded program allocates a fixed amount of time to 
+			each individual thread. Each and every thread runs for a short while and then pauses 
+			and relinquishes the CPU to another thread so that other threads can get a chance to 
+			run. When this happens, all such threads that are ready to run, waiting for the CPU 
+			and the currently running thread lie in a runnable state.
+Blocked/Waiting state: When a thread is temporarily inactive, then it’s in one of the following states: 
+		-Blocked
+		-Waiting
+Timed Waiting: A thread lies in a timed waiting state when it calls a method with a time-out parameter. 
+ 			   A thread lies in this state until the timeout is completed or until a notification is received. 
+ 			   For example, when a thread calls sleep or a conditional wait, it is moved to a timed waiting state.
+Terminated State: A thread terminates because of either of the following reasons: 
+					Because it exits normally. This happens when the code of the thread has been entirely executed by the program.
+					Because there occurred some unusual erroneous event, like segmentation fault or an unhandled exception  
+   
+   
+   
+   
+Q5) Differentiate between the Thread class and Runnable interface for creating a Thread?
+
+--The significant differences between extending Thread class and implementing Runnable interface:
+
+1.When we extend Thread class, we can’t extend any other class even we require and When we implement 
+  Runnable, we can save a space for our class to extend any other class in future or now.
+2.When we extend Thread class, each of our thread creates unique object and associate with it. 
+3.When we implements Runnable, it shares the same object to multiple threads.
+
+
+
+Q6) What if we call Java run() method directly instead start() method?
+
+-- Each thread starts in a separate call stack.
+--Invoking the run() method from the main thread, the run() method goes onto the current call 
+  stack rather than at the beginning of a new call stack.
+  
+  

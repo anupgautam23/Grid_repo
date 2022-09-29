@@ -1,0 +1,18 @@
+Q2/- What’s the difference between class lock and object lock?
+
+Ans:-
+
+
+ 1. Class level lock is achieved by keyword "Static Synchronized,where as 
+	object level is achieved only by synchronized keyword. Object level lock 
+	is achieved to restrict same object to operate through different thread,
+	where as class level lock is achieved to restrict any object to operate.
+ 2. while a thread is executing the static synchronized, the remaining threads 
+    are not allowed to execute any other static synchronized method of that class 
+    simultaneously
+ 3. Class level lock and instance level lock both are different. Both don’t interfere 
+    each other lock status. If one instance of a class has already got locked by a 
+    thread then another thread can’t get lock for that instance until unless lock is 
+    freed by first thread. Same behaviour is there for class level lock.
+    But if a thread acquires Class level lock then another thread can acquire lock 
+    on one of its instance. Both can work parallel.`

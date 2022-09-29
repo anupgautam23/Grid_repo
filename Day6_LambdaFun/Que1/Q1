@@ -1,0 +1,62 @@
+Q1/ - Write down some predefined Functional interfaces in the java library at least 4
+interfaces, with their methods.
+
+Ans:- some predefined Functional interfaces are:-
+
+   1. Predicate
+   2. Supplier
+   3. Consumer
+   4.Function
+   
+
+1. java.util.function.Predicate(I) --> This method checks whether supplied object satisfied the given consdition or not ?
+---------------  -> It has  only one abstract method 
+  
+  Ex:-
+  
+   interface Predicate<T>{
+
+	public boolean test(T t);
+
+	}
+  
+2. java.util.function.Supplier<T>: 
+---------------------------------
+ -- It has only one abstract method 
+ -- it will return some <T> datatype:
+ 
+ Ex:-
+ 
+  Interface Supplier<T>{
+  
+  public <T> get();
+  }
+  
+3. java.util.function.Consumer<T>:-
+------------------------------------
+-- It will accept/consume genric type and does not return anything.
+-- it has only one abstratc method
+
+ Ex:-
+ 
+ Interface Consumer<T>{
+ 
+   public void accept(T t);
+   
+   }
+   
+4.java.util.function.Function<T,R>:
+-------------------------------------
+-- it will return some object <R> after applying some given condition. 
+-- it has only one bstratc method
+
+Interface Function(T,R){
+ public R apply(T);
+}
+   
+   
+   
+   
+   
+
+    

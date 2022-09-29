@@ -1,0 +1,26 @@
+Q2) Explain the difference between Checked and Unchecked exceptions. write some
+examples of checked and unchecked exception classes.
+
+CheckedException:- 
+-The classes  which  are direct child of Exception class are checkedException including Exception class. 
+-It occurs at Run time but the JVM needs the exception to catch and handle at compile time.
+-The compiler checks the CheckedException at compile time.
+-This type of Exception can be handled at compile time . 
+
+
+Example:-
+ 1.ClasNotFoundException
+ 2.FileNotFoundException etc.
+ 
+UncheckeddException:-
+-The classes which are direct child of RuntimeException including RunTimeException are Unchecked Exception.
+-It occurs at Run time but the JVM don't needs the exception to catch and handle at compile time.
+-The compiler  not checks the UncheckedException at compile time.
+-here compiler will not force to handle unceckedException . 
+
+
+Example:-
+ 1. ArithmaticException.
+ 2. NullPointerException.
+ 3. ArrayIndexOutOfBoundException etc.
+

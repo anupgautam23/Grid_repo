@@ -1,0 +1,72 @@
+
+
+How hashMap will work : - 
+
+Map<Student,String>  hm =  new hashMap<>();
+
+  hm.put(Student,"mumbai");
+  
+  int hashValue =  Student.hashCode();
+  
+  initially hashvalu  is large/ big number but after 
+   gerarating hashcode and equals method in bean class
+   
+   
+  int  index  = hashfunction(hashvalue);
+  
+  in index = is between 1 and 16;
+
+Ex:-
+
+Demo.java:
+-----------
+  Map<Student, String> hMap = new HashMap<>();
+		Student s1 = new Student();
+	
+		hMap.put(s1, null);
+		
+		
+		System.out.println(s1.hashCode()); 
+		
+		outpput:-  3544696
+		
+		
+--HashSet internally uses  only HashMap.
+
+-------------------------------------------------------------------------
+
+Exception Handling :- 
+
+Gracefull/Normal termination : -  if the last line of the main method executed
+                                  successfully then we can say that it is normal termination.
+                    
+Abnormal Terminantion : - opposite to above 
+
+
+-- The main objective of eh is normal termination.
+-- always occurs at runtime , it never occurs at compile time exception.
+
+
+
+There are 2 types  of error 
+
+1. syntax error:  syntactical  error
+2. Logical error: for some type of logical mistakes in code , JVM will unable to execute the code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  
+
+		
+		
+		 

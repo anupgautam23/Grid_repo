@@ -1,0 +1,16 @@
+Q5/- What is the Difference between the sleep and join method .
+
+ANs:-
+-----
+
+Sleep:-
+-------
+
+-- if two or more thread are working on same object and we want some delay in the some thread then 
+   we can use Thread.sleep which results to delay in thread to execute by some given time.
+   
+Join:-
+------
+-- if two or more thread are working on same object and we want to completely execute first thread followed by 
+   second thread then we can use Thread.join which results second threaad execting start after first thread completed.
+       
