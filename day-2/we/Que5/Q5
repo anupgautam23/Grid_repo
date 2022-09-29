@@ -1,0 +1,21 @@
+Q5) Explain Difference between Upper Bounded Wildcards and Lower Bounded Wildcards with Example.
+
+
+Upper Bounded Wildcards:
+ 
+ -- These wildcards can be used when we want  to relax the restrictions on variables. 
+ -- it is represented by '?'character followed by 'extend' keywords which ,followed by  its Upper bound.
+ 
+ for example :-
+        if I write   -      List<Integer>, List<Number> 
+        then its upper bound is - List<? extends Number> 
+        
+  Lower Bounded Wildcards:-
+  
+  -- These wildcards can be used when we want  to relax the restrictions on variables. 
+  -- it is represented by '?' character followed bysuper keyword , followed by it Lower Bound.  
+  
+  for example :-
+        if I write   -      List<Number>
+        then its upper bound is - List<? super Integer> ,List<? super Number>       
+        
